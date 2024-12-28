@@ -38,7 +38,7 @@ rtmp {
         listen 1935; # Standard RTMP port
         chunk_size 4096;
 
-        application live {
+        application stream {
             live on;
             record off;
             
@@ -53,6 +53,10 @@ rtmp {
             dash_path /tmp/dash;
             dash_fragment 3;
             dash_playlist_length 60;
+
+            # Allow all streams without requiring a key
+            allow publish all;
+            allow play all;
         }
     }
 }
@@ -128,9 +132,9 @@ SERVER_IP=$(ip -4 addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | grep -v '^12
 
 echo "NGINX RTMP server installation complete!"
 echo "Server IP: $SERVER_IP"
-echo "Stream URL: rtmp://$SERVER_IP/live/stream-key"
-echo "HLS URL: http://$SERVER_IP:8080/hls/stream-key.m3u8"
-echo "DASH URL: http://$SERVER_IP:8080/dash/stream-key.mpd"
+echo "Stream URL: rtmp://$SERVER_IP/stream"
+echo "HLS URL: http://$SERVER_IP:8080/hls/stream.m3u8"
+echo "DASH URL: http://$SERVER_IP:8080/dash/stream.mpd"
 echo "Status Page: http://$SERVER_IP:8080/stat"
 
 # Cleanup

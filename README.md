@@ -49,20 +49,28 @@ After installation, the server will be running and configured with the following
 
 ### Streaming to the Server
 The installation script will automatically detect your server's IP address and display the URLs. The format will be:
-- RTMP Streaming URL: `rtmp://<detected-ip>/live/stream-key`
+- RTMP Streaming URL: `rtmp://<detected-ip>/stream`
   - The IP will be automatically detected and shown during installation
-  - Replace `stream-key` with your chosen stream key
+  - No stream key required - anyone can stream to this endpoint
 
 ### Watching Streams
 After installation, you'll receive URLs in the format:
-- HLS Stream: `http://<detected-ip>:8080/hls/stream-key.m3u8`
-- DASH Stream: `http://<detected-ip>:8080/dash/stream-key.mpd`
+- HLS Stream: `http://<detected-ip>:8080/hls/stream.m3u8`
+- DASH Stream: `http://<detected-ip>:8080/dash/stream.mpd`
 - Statistics Page: `http://<detected-ip>:8080/stat`
 
 ### Streaming Software Configuration
 1. In your streaming software (OBS, FFmpeg, etc.), use the URLs provided during installation:
-   - URL: `rtmp://<detected-ip>/live`
-   - Stream Key: Your chosen stream key
+   - URL: `rtmp://<detected-ip>/stream`
+   - Stream Key: Leave empty (not required)
+
+### Security Note
+This server is configured for open access - any client can publish or play streams. This is suitable for:
+- Personal use on trusted networks
+- Testing and development
+- Local network streaming
+
+For production use, consider implementing authentication mechanisms.
 
 ### Service Management
 ```bash
