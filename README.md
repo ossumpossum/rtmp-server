@@ -92,3 +92,32 @@ sudo systemctl status nginx-rtmp
 - 8080: HTTP (HLS/DASH streaming and statistics)
 
 Make sure these ports are open in your firewall if you want to allow external access.
+
+## Testing the Server
+
+A test script is included to verify the server is working correctly:
+
+1. Make the test script executable:
+```bash
+chmod +x test-stream.sh
+```
+
+2. Run the test:
+```bash
+./test-stream.sh
+```
+
+The test script will:
+- Install FFmpeg if not already installed
+- Generate a 10-second test video pattern
+- Stream the test video to your RTMP server
+- Check all endpoints (RTMP, HLS, DASH)
+- Verify the status page is accessible
+- Provide instructions for viewing the stream
+
+You can view the test stream using VLC Media Player:
+1. Open VLC
+2. Go to Media -> Open Network Stream
+3. Enter the RTMP URL or HLS URL shown in the test output
+
+The test stream includes a standard test pattern with a tone, perfect for verifying both video and audio streaming functionality.
