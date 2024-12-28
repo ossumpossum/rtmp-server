@@ -123,11 +123,15 @@ sudo systemctl daemon-reload
 sudo systemctl enable nginx-rtmp
 sudo systemctl start nginx-rtmp
 
+# Get the server's IP address (preferring non-localhost IPv4 address)
+SERVER_IP=$(ip -4 addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | grep -v '^127\.' | head -n 1)
+
 echo "NGINX RTMP server installation complete!"
-echo "Stream URL: rtmp://your-server-ip/live/stream-key"
-echo "HLS URL: http://your-server-ip:8080/hls/stream-key.m3u8"
-echo "DASH URL: http://your-server-ip:8080/dash/stream-key.mpd"
-echo "Status Page: http://your-server-ip:8080/stat"
+echo "Server IP: $SERVER_IP"
+echo "Stream URL: rtmp://$SERVER_IP/live/stream-key"
+echo "HLS URL: http://$SERVER_IP:8080/hls/stream-key.m3u8"
+echo "DASH URL: http://$SERVER_IP:8080/dash/stream-key.mpd"
+echo "Status Page: http://$SERVER_IP:8080/stat"
 
 # Cleanup
 cd
